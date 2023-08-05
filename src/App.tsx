@@ -25,12 +25,7 @@ import authProvider from "./authProvider";
 import { AppIcon } from "./components/app-icon";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
+
 import {
   CategoryCreate,
   CategoryEdit,
@@ -38,6 +33,7 @@ import {
   CategoryShow,
 } from "./pages/categories";
 import { supabaseClient } from "./utility";
+import {Posts} from "./pages/posts/Posts";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -64,16 +60,7 @@ function App() {
               notificationProvider={notificationProvider}
               i18nProvider={i18nProvider}
               resources={[
-                {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
+
                 {
                   name: "categories",
                   list: "/categories",
@@ -113,11 +100,8 @@ function App() {
                     index
                     element={<NavigateToResource resource="blog_posts" />}
                   />
-                  <Route path="/blog-posts">
-                    <Route index element={<BlogPostList />} />
-                    <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
-                    <Route path="show/:id" element={<BlogPostShow />} />
+                  <Route path="/blog-posts" element={<Posts />}>
+
                   </Route>
                   <Route path="/categories">
                     <Route index element={<CategoryList />} />
